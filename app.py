@@ -23,7 +23,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///eventsite.sqlite'
 
-from db_schema import db, User, Story, Charity, TypeLookup, dbinit
+from db_schema import db, User, Story, Charity, dbinit
 
 db.init_app(app)
 
@@ -101,6 +101,7 @@ def loginGET():
         return redirect(url_for('index'))
     return render_template("login.html")
 
+
 @app.route('/login', methods=['POST'])
 def loginPOST():
     email = request.form.get('email')  # This would be the name attribute of the email input
@@ -108,6 +109,7 @@ def loginPOST():
 
     # Validate the presence of email and password
     if not email or not password:
+        print("Hello")
         return redirect(url_for('loginGET'))
 
     # Try to fetch the user by email
@@ -126,5 +128,48 @@ def loginPOST():
     login_user(user)
     return redirect(url_for('index'))
 
+@app.get('/signup')
+def signupGET():
+   if current_user.is_authenticated:
+        return redirect('/')
+   return render_template("signup.html")
+
+@app.post('/signup')
+def registerPOST():
+    name = request.form["name"]
+    email = request.form["email"]
+    password = request.form["password"]
+    charity = request.form["charity"]
+
+    if email is None or password is None:
+        return redirect('/register')
+    
+    if charity != "null":
+        charityName = Charity.query.filter_by(name=charity).first()
+    else:
+        charityName = charity
+
+    try:
+        user_email = User.query.filter_by(email=email).first()
+    except:
+        return redirect('/register')
+
+    if user_email is not None:
+        return redirect('/register')
+    
+    if not valid_password(password) or not valid_email(email):
+        return redirect('/register')
+    
+    try:
+        newUser = User(name, email, password, )
+        db.session.add(newUser)
+        db.session.commit()
+    except IntegrityError as exc:
+        db.session.roll
+        db.session.rollback()
+        return redirect('/register')
+
+    return redirect('/login')
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, ssl_context=("cert.pem","key.pem"))
