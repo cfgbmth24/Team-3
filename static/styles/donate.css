@@ -1,0 +1,90 @@
+body {
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    background: rgb(228,57,129);
+    background: linear-gradient(90deg, rgba(228,57,129,0.8) 0%, rgba(9,9,121,1) 40%, rgba(0,120,182,0.8) 100%);
+    font-family: Arial, sans-serif; /* Set font family */
+}
+
+.donate-box {
+    background-color: transparent;
+    padding: 60px;
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+    width: 40%;
+    margin: 0 auto; /* Center align horizontally */
+    color:rgb(228,57,129);
+}
+
+
+.boxes-container {
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-around; /* Distribute boxes evenly */
+    margin-top: 30px; /* Add margin to separate from donate box */
+}
+
+.box {
+    background-color: white;
+    border:#E2397E;
+    padding: 20px;
+    text-align: center;
+    width: 20%;
+    border-radius: 10px; /* Add border-radius for curved corners */
+    color: rgba(9,9,121,1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 24px;
+}
+
+.amount-box {
+    background-color:transparent;
+    padding: 20px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    width: 40%; /* Adjust width */
+    margin: 20px auto; /* Center horizontally and add space around */
+    color:white;
+    
+    
+}
+
+
+.payment-boxes {
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-around; /* Distribute boxes evenly */
+    margin-top: 30px; /* Add margin to separate from other content */
+}
+.apple-pay-image {
+    width: 40px; /* Adjust the width of the Apple Pay image */
+    height: auto; /* Maintain aspect ratio */
+}
+.google-pay-image {
+    width: 25px; /* Adjust the width of the Apple Pay image */
+    height: auto; /* Maintain aspect ratio */
+}
+.card-pay-image {
+    width: 35px; /* Adjust the width of the Apple Pay image */
+    height: auto; /* Maintain aspect ratio */
+}
+.pay-box,
+.gpay-box,
+.cpay-box  {
+        background-color: rgb(228, 57, 129);
+        padding: 20px;
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        width: 20%;
+        color: white;
+        --display: flex;
+        --flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Align items horizontally */
+    }
+    
+
+/* Add this CSS to your styles.css file or within a <style> tag in your HTML */
+
+
+
+/* Your other CSS styles for payment boxes, etc. go here */
