@@ -19,11 +19,11 @@ body {
 
 .price-button {
     display: inline-block;
-    padding: 10px 20px;
+    padding: 20px 60px;
     background-color:white;
     color:rgba(9,9,121,1);
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 10px;
     transition: background-color 0.3s ease;
 }
 .donate-button {
@@ -36,7 +36,11 @@ body {
     transition: background-color 0.3s ease;
 }
 
+
 .price-button:hover {
+    background-color: #0056b3;
+}
+.donate-button:hover {
     background-color: #0056b3;
 }
 
