@@ -30,5 +30,34 @@ db.init_app(app)
 with app.app_context():
   dbinit()
 
+#Login manager
 
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = "login"
+
+@login_manager.user_loader
+def load_user(id):
+    return User.query.get(int(id))
+
+#Mail manager
+
+app.config['MAIL_SERVER'] = 'localhost'
+app.config['MAIL_PORT'] = 25
+app.config['MAIL_USE_TLS'] = False  
+app.config['MAIL_USE_SSL'] = False  
+app.config['MAIL_USERNAME'] = None 
+app.config['MAIL_PASSWORD'] = None 
+app.config['MAIL_SUPPRESS_SEND'] = False
+
+
+from flask_mail import Mail, Message
+from flask import Flask, request, redirect, url_for, render_template, flash
+from itsdangerous import URLSafeTimedSerializer as safeURL
+
+mail = Mail(app)
+
+@app.route("/")
+def index():
+   return render_template('')
 
