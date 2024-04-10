@@ -17,20 +17,13 @@ class User(UserMixin, db.Model):
     name = db.Column(db.String(100), nullable=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password_hash = db.Column(db.String(128), nullable=False)
-    verified = db.Column(db.Boolean, nullable=False)
 
-    typeUser = db.Column(db.Integer, db.ForeignKey('typelookup.id'), nullable=False)
-    charityId = db.Column(db.Integer, db.ForeignKey('charity.id'), nullable=True)
-
-    typeuser = db.relationship('TypeLookup', back_populates="users")
-    charity = db.relationship('Charity', back_populates="users")
     stories = db.relationship('Story', back_populates="user")
 
-    def __init__(self, name, email, password, verified):
+    def __init__(self, name, email, password):
         self.name = name
         self.email = email
         self.set_password(password)
-        self.verified = verified
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -54,30 +47,11 @@ class Story(db.Model):
         self.content = content
         self.title = title
 
-class Charity(db.Model):
-    __tablename__ = 'charity'
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), nullable=False)
-    location = db.Column(db.String(50), nullable=False)
-    description = db.Column(db.Text, nullable=False)  # Assuming text description
-
-    users = db.relationship('User', back_populates="charity")
-
-    def __init__(self, name, location, description):
-        self.name = name
-        self.location = location
-        self.description = description
-
-class TypeLookup(db.Model):
-    __tablename__ = 'typelookup'
-    id = db.Column(db.Integer, primary_key=True)
-    userType = db.Column(db.String(40), nullable=False)
-
-    users = db.relationship('User', back_populates="typeuser")
-
-    def __init__(self, userType):
-        self.userType = userType
-
 def dbinit():
+    tables = inspect(db.engine).get_table_names()
+    if len(tables) > 0:
+        return
     db.create_all()  # This will create all tables
+    db.session.add(User("Mustafa","mustafamamujee03@gmail.com", "root"))
+    db.session.commit()
 
