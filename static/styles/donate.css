@@ -17,6 +17,30 @@ body {
     color:rgb(228,57,129);
 }
 
+.price-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color:white;
+    color:rgba(9,9,121,1);
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+.donate-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color:transparent;
+    color:rgb(228,57,129);
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.price-button:hover {
+    background-color: #0056b3;
+}
+
+
 
 .boxes-container {
     display: flex; /* Use flexbox for layout */
@@ -81,6 +105,25 @@ body {
         --flex-direction: column; /* Stack items vertically */
         align-items: center; /* Align items horizontally */
     }
+    .payment-button {
+        border: none;
+        background:rgb(228, 57, 129) ;
+        text-align: center;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        transition: background-color 0.3s ease;
+    }
+    
+    .payment-button:hover {
+        background-color: #f0f0f0;
+    }
+    
+    .payment-text {
+        margin-left: 10px;
+    }
+    
     
 
 /* Add this CSS to your styles.css file or within a <style> tag in your HTML */
