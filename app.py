@@ -63,5 +63,68 @@ def index():
 
 
 
+def valid_password(password):
+    if len(password) < 8:
+        return False
+    
+    if not re.search(r"[A-Z]", password):
+        return False
+    
+    if not re.search(r"[a-z]", password):
+        return False
+    
+    if not re.search(r"\d", password):
+        return False
+    
+    if not re.search(r"[!@#$%^&*(),.?\":{}|<>]", password):
+        return False
+
+    return True
+
+def valid_email(email):
+    if "@" in email:
+        parts = email.split("@")
+        if len(parts) == 2 and all(parts):
+            return True
+    return False
+
+def valid_username(username):
+    if re.match("^[a-zA-Z0-9_-]{3,20}$", username):
+        return True
+    else:
+        return False
+
+
+@app.route('/login', methods=['GET'])
+def loginGET():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    return render_template("login.html")
+
+@app.route('/login', methods=['POST'])
+def loginPOST():
+    email = request.form.get('email')  # This would be the name attribute of the email input
+    password = request.form.get('password')  # This would be the name attribute of the password input
+
+    # Validate the presence of email and password
+    if not email or not password:
+        return redirect(url_for('loginGET'))
+
+    # Try to fetch the user by email
+    user = User.query.filter_by(email=email).first()
+
+    if user is None:
+        print("test")
+        return redirect(url_for('loginGET'))
+
+    if not user.check_password(password):
+        return redirect(url_for('loginGET'))
+
+    if not user.check_verified():
+        return redirect(url_for('loginGET'))
+    
+    login_user(user)
+    return redirect(url_for('index'))
+
 if __name__ == "__main__":
     app.run(debug=True)
