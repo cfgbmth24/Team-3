@@ -172,7 +172,7 @@ def registerPOST():
 
 def send_donation_email():
     recipients = [current_user.email]
-    sender = "u2212705@dcs.warwick.ac.uk"
+    sender = "mustafamamujee03@gmail.com"
     confirm_url = url_for("login", _external=True)
     mail.send_message(
             sender=("NOREPLY", sender),
