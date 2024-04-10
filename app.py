@@ -161,6 +161,18 @@ def registerPOST():
 
     return redirect('/login')
 
+def send_donattion_email():
+    recipients = [current_user.email]
+    sender = "u2212705@dcs.warwick.ac.uk"
+    mail.send_message(
+            sender=("NOREPLY", sender),
+            subject="This is how you helped",
+            body="""Dear {current_user.name}
+
+            Thank you for your donation,
+
+""",
+            recipients=recipients)
 
 
 if __name__ == "__main__":
