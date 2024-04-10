@@ -1,0 +1,85 @@
+/* General */
+
+*{
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+a{
+    cursor: pointer;
+    color: inherit;
+    text-decoration: none;
+}
+
+body{
+
+}
+button{
+    border: solid 0.1rem #000c4195;
+    border-radius: 1.5rem;
+    background-color: transparent;
+    font-family: 'Questrial', sans-serif;
+    width: 4.6rem;
+    height: 2.4rem;
+    cursor: pointer;
+}
+
+
+
+
+/* Home Section  */
+#logo{
+    width: 17rem;
+}
+
+#navbar{
+    width:90%;
+    height: 15vh;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.navbar-items:hover{
+    transform: scale(1.075);
+    transition: 0.15s ease-in-out;
+}
+.navbar-left{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-right{
+    width: 35%;
+}
+
+.navbar-right-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-buttons{
+    border-color: #ED1266;
+    border-width: 0.085rem;
+    transition: 0.15s ease-in-out;
+}
+
+.navbar-buttons:hover{
+    background-color: #ED1266;
+    color: white;
+    
+}
+
+#donate-button{
+    background-color: #ED1266;
+    color: white;
+}
+#donate-button:hover{
+    background-color: white;
+    color: #ED1266;
+}
