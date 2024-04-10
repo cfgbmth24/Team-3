@@ -81,5 +81,3 @@ class TypeLookup(db.Model):
 def dbinit():
     db.create_all()  # This will create all tables
 
-if __name__ == "__main__":
-    dbinit()  # Initialize the database
