@@ -10,9 +10,12 @@ a{
     color: inherit;
     text-decoration: none;
 }
-
+li{
+    list-style-type: none;
+}
 body{
 
+    
 }
 button{
     border: solid 0.1rem #000c4195;
@@ -53,7 +56,7 @@ button{
 }
 
 .navbar-right{
-    width: 35%;
+    width: 40%;
 }
 
 .navbar-right-container{
@@ -64,6 +67,8 @@ button{
 }
 
 .navbar-buttons{
+    width: 5.9rem;
+    height: 2.6rem;
     border-color: #ED1266;
     border-width: 0.085rem;
     transition: 0.15s ease-in-out;
@@ -76,10 +81,81 @@ button{
 }
 
 #donate-button{
+
     background-color: #ED1266;
     color: white;
 }
 #donate-button:hover{
     background-color: white;
     color: #ED1266;
+}
+
+
+/* First Section */
+#main-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container-left{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.container-right{
+width: 50%;
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+
+}
+/* Share your stroy Section  */
+
+#share-your-story-heading-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#share-your-story-heading{
+    font-size: 5rem;
+}
+
+.heading-right{
+    color: #ED1266;
+}
+.heading-left{
+    color: #0078B7;
+}
+
+/* Carousel Container */
+
+
+.carousel-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    height: 50rem;
+    width: 50rem;
+}
+
+/* Donate Section  */
+.donate-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#donate-button-footer{
+    width: 7rem;
 }
