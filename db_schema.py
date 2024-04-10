@@ -17,20 +17,18 @@ class User(UserMixin, db.Model):
     name = db.Column(db.String(100), nullable=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password_hash = db.Column(db.String(128), nullable=False)
-    verified = db.Column(db.Boolean, nullable=False)
 
-    typeUser = db.Column(db.Integer, db.ForeignKey('typelookup.id'), nullable=False)
     charityId = db.Column(db.Integer, db.ForeignKey('charity.id'), nullable=True)
 
-    typeuser = db.relationship('TypeLookup', back_populates="users")
     charity = db.relationship('Charity', back_populates="users")
     stories = db.relationship('Story', back_populates="user")
 
-    def __init__(self, name, email, password, verified):
+    def __init__(self, name, email, password, charityId):
         self.name = name
         self.email = email
         self.set_password(password)
-        self.verified = verified
+        if (charityId != "null"):
+            self.charityId = charityId
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -67,16 +65,6 @@ class Charity(db.Model):
         self.name = name
         self.location = location
         self.description = description
-
-class TypeLookup(db.Model):
-    __tablename__ = 'typelookup'
-    id = db.Column(db.Integer, primary_key=True)
-    userType = db.Column(db.String(40), nullable=False)
-
-    users = db.relationship('User', back_populates="typeuser")
-
-    def __init__(self, userType):
-        self.userType = userType
 
 def dbinit():
     db.create_all()  # This will create all tables
