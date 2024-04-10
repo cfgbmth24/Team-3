@@ -201,3 +201,9 @@ align-items: center;
     color:  #ED1266;
     border-color: #ED1266;
 }
+
+.plug {
+text-align: center;
+font-family: sans-serif;
+color: white;
+}
