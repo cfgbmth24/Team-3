@@ -137,29 +137,31 @@ def registerPOST():
     password = request.form["password"]
 
     if email is None or password is None:
-        return redirect('/register')
+        return redirect('/signup')
 
     try:
         user_email = User.query.filter_by(email=email).first()
     except:
-        return redirect('/register')
+        return redirect('/signup')
 
     if user_email is not None:
-        return redirect('/register')
+        return redirect('/signup')
     
     if not valid_password(password) or not valid_email(email):
-        return redirect('/register')
+        return redirect('/signup')
     
     try:
-        newUser = User(name, email, password, )
+        newUser = User(name, email, password)
         db.session.add(newUser)
         db.session.commit()
     except IntegrityError as exc:
         db.session.roll
         db.session.rollback()
-        return redirect('/register')
+        return redirect('/signup')
 
     return redirect('/login')
+
+
 
 if __name__ == "__main__":
     app.run(debug=True, ssl_context=("cert.pem","key.pem"))
