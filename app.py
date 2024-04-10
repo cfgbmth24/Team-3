@@ -128,6 +128,11 @@ def login():
         login_user(user)
         return redirect(url_for('index'))
 
+
+@app.get("/volunteer")
+def volunteerGET():
+    return render_template("volunteering.html")
+
 @app.get('/signup')
 def signupGET():
    if current_user.is_authenticated:
@@ -201,5 +206,6 @@ def donating():
         #send_donation_email()
         return redirect("/")
     return render_template('donate.html')
+
 if __name__ == "__main__":
     app.run(debug=True, ssl_context=("cert.pem","key.pem"))
