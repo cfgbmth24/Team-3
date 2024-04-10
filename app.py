@@ -23,7 +23,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///eventsite.sqlite'
 
-from db_schema import db, User, Story, Charity, dbinit
+from db_schema import db, User, Story, dbinit
 
 db.init_app(app)
 
@@ -116,15 +116,11 @@ def loginPOST():
     user = User.query.filter_by(email=email).first()
 
     if user is None:
-        print("test")
         return redirect(url_for('loginGET'))
 
     if not user.check_password(password):
         return redirect(url_for('loginGET'))
 
-    if not user.check_verified():
-        return redirect(url_for('loginGET'))
-    
     login_user(user)
     return redirect(url_for('index'))
 
@@ -139,15 +135,9 @@ def registerPOST():
     name = request.form["name"]
     email = request.form["email"]
     password = request.form["password"]
-    charity = request.form["charity"]
 
     if email is None or password is None:
         return redirect('/register')
-    
-    if charity != "null":
-        charityName = Charity.query.filter_by(name=charity).first()
-    else:
-        charityName = charity
 
     try:
         user_email = User.query.filter_by(email=email).first()
