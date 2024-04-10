@@ -42,13 +42,12 @@ def load_user(id):
 
 #Mail manager
 
-app.config['MAIL_SERVER'] = 'localhost'
-app.config['MAIL_PORT'] = 25
-app.config['MAIL_USE_TLS'] = False  
-app.config['MAIL_USE_SSL'] = False  
-app.config['MAIL_USERNAME'] = None 
-app.config['MAIL_PASSWORD'] = None 
-app.config['MAIL_SUPPRESS_SEND'] = False
+app.config['MAIL_SERVER'] = 'smtp.fastmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+app.config['MAIL_USERNAME'] = "flasktesting@fastmail.com"  # No username required
+app.config['MAIL_PASSWORD'] = "q7w3e92u55yu2qdb"
 
 
 from flask_mail import Mail, Message
@@ -168,31 +167,14 @@ def registerPOST():
 def send_donation_email():
     recipients = [current_user.email]
     sender = "u2212705@dcs.warwick.ac.uk"
-    confirm_url = url_for('/', _external=True)
-    mail.send_message(
-            sender=("NOREPLY", sender),
-            subject="This is how you helped",
-            body=f"""Dear {current_user.name}
-
-            On behalf of everyone at Diverse Abilities, I would like to extend our heartfelt thanks for your recent donation. 
-            Your generosity is not just a gift, but a commitment to the values we uphold and the community we serve together.
-
-            Thanks to contributions like yours, we continue to enhance the lives of people with disabilities across all age groups. Your donation helps us deliver comprehensive care and support through various programs, such as:
-
-- Langside School: A specialist day school providing personalized education and therapeutic programs to children with complex physical disabilities and health needs.
-- Smithers: Offering adults innovative support plans that promote independence, enhance life skills, and provide employment opportunities within the community.
-- Supported Living and Residential Services: Helping adults live as independently as possible in welcoming environments, where they can develop personal, social, and emotional skills.
-- Domiciliary Care: Extending tailored support to individuals in their own homes, fostering independence with respect, dignity, and encouraging community engagement.
-
-We believe in making every aspect of life accessible and enjoyable for those we support, and your donation directly contributes to this mission. If you are moved to extend your impact further, consider joining our network of passionate volunteers. There are numerous opportunities, from engaging directly with those we support to assisting in events that raise awareness and funds for our cause.
-Click here: {confirm_url}
-
-Thank you once again for your kindness and support. Together, we are creating a more inclusive world where every individual has the opportunity to thrive. If you have any questions, or if there's any particular area you're interested in getting involved with, please don't hesitate to reach out.
-
-With gratitude,
-Diverse Abilities
-""",
-            recipients=recipients)
+    confirm_url = url_for("login", _external=True)
+    msg = Message("Hello",
+                  sender="mmamujee357@gmail.com",
+                  recipients=["mustafamamujee03@gmail.com"])  # recipient's email address
+    msg.body = "Testing email from Flask app"
+    print("sent")
+    mail.send(msg)
+    return
 
 @app.route('/donate', methods=['GET','POST'])
 @login_required
